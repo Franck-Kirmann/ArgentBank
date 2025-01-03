@@ -18,8 +18,8 @@ const SignIn = () => {
       return;
     }
     dispatch(login({ email, password })).then((Response) => {
-      if (Response.playload.token) {
-        navigate("/user");
+      if (Response.payload.token) {
+        navigate("/User");
       }
     });
   };
