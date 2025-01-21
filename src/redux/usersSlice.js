@@ -18,10 +18,35 @@ export const login = createAsyncThunk("usersSlice/login", async (userData) => {
   return data.body;
 });
 
+export const getUser = createAsyncThunk(
+  "usersSlice/getUser",
+  async (_, { getState, rejectWithValue }) => {
+    const token = getState().users.token;
+
+    const { data } = await Axios.get(
+      "http://localhost:3001/api/v1/user/profile",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(data.body);
+    return data.body;
+  }
+);
+
 const usersSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      console.log("logout");
+      sessionStorage.clear();
+      state.token = null;
+      state.currentUser = {};
+    },
+  },
 
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
@@ -34,7 +59,19 @@ const usersSlice = createSlice({
       sessionStorage.clear();
       console.log(state.error);
     });
+
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      // sessionStorage.setItem("token", action.payload.token);
+      state.currentUser = action.payload;
+      state.error = null;
+    });
+
+    builder.addCase(getUser.rejected, (state, action) => {
+      sessionStorage.clear();
+      console.log(state.error);
+    });
   },
 });
 
+export const { logout } = usersSlice.actions;
 export default usersSlice.reducer;

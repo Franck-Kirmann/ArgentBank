@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../redux/usersSlice";
+import { login, getUser } from "../redux/usersSlice";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -19,6 +19,7 @@ const SignIn = () => {
     }
     dispatch(login({ email, password })).then((Response) => {
       if (Response.payload.token) {
+        dispatch(getUser());
         navigate("/User");
       }
     });
