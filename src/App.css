@@ -264,6 +264,50 @@ html {
   margin-bottom: 2rem;
 }
 
+.edit {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  margin: 10px auto;
+}
+
+.edit input {
+  padding: 5px 10px;
+  border-radius: 7px;
+  margin-bottom: 7px;
+  border: gray solid 1px;
+}
+.edit input:disabled {
+  opacity: 0.5;
+  color: black;
+  background-color: lightgray;
+}
+
+.edit-user-button {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 5px;
+}
+
+.edit-user-button button {
+  width: 50%;
+  padding: 10px 0;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.save {
+  background-color: green;
+}
+
+.cancel {
+  background-color: red;
+}
+
 .transaction-button {
   display: block;
   width: 100%;

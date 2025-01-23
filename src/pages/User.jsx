@@ -1,18 +1,40 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Edit from "./../components/Layouts/Edit";
 
 const User = () => {
   const user = useSelector((state) => state.users.currentUser);
+  const [isEditing, setIsEditing] = useState(false);
+
+  // Fonction pour démarrer l'édition
+  const startEditing = () => {
+    setIsEditing(true);
+  };
+
+  // Fonction pour arrêter l'édition
+  const stopEditing = () => {
+    setIsEditing(false);
+  };
 
   return (
     <main className="main bg-dark">
       <div className="header">
-        <h1>
-          Welcome back
-          <br />
-          {user.firstName} {user.lastName}
-        </h1>
-        <button className="edit-button">Edit Name</button>
+        {isEditing ? (
+          <Edit stopEditing={stopEditing} />
+        ) : (
+          <div>
+            {" "}
+            <h1>
+              Welcome back
+              <br />
+              {user.firstName} {user.lastName}
+            </h1>
+            <button className="edit-button" onClick={startEditing}>
+              Edit Name
+            </button>
+          </div>
+        )}
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">
