@@ -1,12 +1,17 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { updateUser } from "../../redux/usersSlice";
 
 const Edit = ({ stopEditing }) => {
   const user = useSelector((state) => state.users.currentUser);
   const [EditUsername, setEditUsername] = useState("");
 
+  const dispatch = useDispatch();
+
   const Save = () => {
-    stopEditing();
+    dispatch(updateUser({ userName: EditUsername }));
+    // stopEditing();
   };
 
   const Cancel = () => {
@@ -49,6 +54,10 @@ const Edit = ({ stopEditing }) => {
       </div>
     </div>
   );
+};
+
+Edit.propTypes = {
+  stopEditing: PropTypes.func.isRequired,
 };
 
 export default Edit;

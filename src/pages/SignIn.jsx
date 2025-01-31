@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { login, getUser } from "../redux/usersSlice";
+import { useDispatch } from "react-redux";
+import { login, getUser, setRememberMe } from "../redux/usersSlice";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +18,7 @@ const SignIn = () => {
       return;
     }
     dispatch(login({ email, password })).then((Response) => {
+      console.log("API Response:", Response);
       if (Response.payload.token) {
         dispatch(getUser());
         navigate("/User");
@@ -48,7 +49,11 @@ const SignIn = () => {
             />
           </div>
           <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
+            <input
+              type="checkbox"
+              id="remember-me"
+              onChange={(e) => dispatch(setRememberMe(e.target.checked))}
+            />
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button type="submit" className="sign-in-button">

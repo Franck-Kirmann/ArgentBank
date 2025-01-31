@@ -71,7 +71,7 @@ html {
 }
 
 .hero {
-  background-image: url("assets/images/bank-tree.jpeg");
+  background-image: url("assets/images/bank-tree-dekstop.webp");
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -331,5 +331,17 @@ html {
 
   .transaction-button {
     width: 200px;
+  }
+}
+
+@media (min-width: 768) and (max-width: 1024px) {
+  .hero {
+    background-image: url("assets/images/bank-tree-tablette.webp");
+  }
+}
+
+@media (max-width: 768) {
+  .hero {
+    background-image: url("assets/images/bank-tree-mobile.webp");
   }
 }

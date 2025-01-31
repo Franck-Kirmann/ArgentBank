@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import argentBankLogo from "../../assets/images/argentBankLogo.png";
+import argentBankLogo from "../../assets/images/argentBankLogo.webp";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../redux/usersSlice";
 const Header = () => {
